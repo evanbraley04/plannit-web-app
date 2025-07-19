@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Friends Planner</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+
+    <body class="main_body">
+        <div class="sidebar">
+            <i class='bx bx-planet' ></i>
+            <p class="title">Plannit</p> 
+            <p class="line"></p>
+            <div class="side_buttons">
+                <a href="{{ url_for('index') }}" class="home">Home</a>
+                <a href="{{ create_event_url }}" class="create">Create Event</a>
+                <a href="{{ share_planner_url }}" class="friends">Share Planner</a>
+                <a href="#" class="friends-list" style="background-color: #23acda; border: 2px solid white;">Friends</a>
+            </div>
+        </div>
+        
+        <div class="header">
+            <div class="info">
+                <a href={{ url_for('user_routes.user', username=current_user.id) }} class="settings">Settings</a>
+                <a href={{ url_for('user_routes.logout') }} class="logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="schedule">
+            <div class="hello_user"><h3>{{current_user.username}}'s Friends' Events</h3></div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li class="flash-message">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <div class="table">
+                <div>
+                    <p style="border-radius: 10px 0 0 10px;">Sunday</p><br>
+                    {% for event in sunday_event_list %}
+                        <p class="daysched">{{ event.title }} @{{ event.time }}</p><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Monday</p><br>
+                    {% for event in monday_event_list %}
+                        <p class="daysched">{{ event.title }} @{{ event.time }}</p><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Tuesday</p><br>
+                    {% for event in tuesday_event_list %}
+                        <p class="daysched">{{ event.title }} @{{ event.time }}</p><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Wednesday</p><br>
+                    {% for event in wednesday_event_list %}
+                        <p class="daysched">{{ event.title }} @{{ event.time }}</p><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Thursday</p><br>
+                    {% for event in thursday_event_list %}
+                        <p class="daysched">{{ event.title }} @{{ event.time }}</p><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Friday</p><br>
+                    {% for event in friday_event_list %}
+                        <p class="daysched">{{ event.title }} @{{ event.time }}</p><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p style="border-radius: 0 10px 10px 0;">Saturday</p><br>
+                    {% for event in saturday_event_list %}
+                        <p class="daysched">{{ event.title }} @{{ event.time }}</p><br><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

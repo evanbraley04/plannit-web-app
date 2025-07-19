@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Update Event</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body class="main_body">
+        <div class="sidebar">
+            <i class='bx bx-planet'></i>
+            <p class="title">Plannit</p> 
+            <p class="line"></p>
+            <div class="side_buttons">
+                <a href="{{ url_for('index') }}" class="home">Home</a>
+                <a href="{{ create_event_url }}" class="create">Create Event</a>
+                <a href="{{ share_planner_url }}" class="friends">Share Planner</a>
+                <a href="{{ friends_planner_url }}" class="friends-list">Friends</a>
+            </div>
+        </div>
+        
+        <div class="header">
+            <div class="info">
+                <a href={{ url_for('user_routes.user', username=current_user.id) }} class="settings">Settings</a>
+                <a href={{ url_for('user_routes.logout') }} class="logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="schedule">
+            <div class="updatey-event">
+                <h1>Event Settings</h1><br><br>
+                <h2>Update Event Information for: {{ event_data.get('title') }}</h2>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li class="flash-message" style="margin-left: 0px; list-style: none; color: lightgreen">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}<br>
+
+                <div class="info-of-events">
+                    Title: {{ event_data.get('title') }}<br>
+                    Day: {{ day_name }}<br>
+                    Time: {{ event_data.get('time') }}
+                </div><br><br>
+                <p>Update Event Information:<p><br>
+                <form action="{{ url_for('event_routes.update_event', event_id=event_id) }}" method="POST">
+                    <label for="title">Title:</label><br>
+                    <input type="text" id="title" name="title"><br><br>
+                    <label for="day">Day:</label><br>
+                    <select id="day" name="day">
+                        <option disabled selected>Select a Day</option>
+                        <option value="Sunday">Sunday</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select><br><br>
+                    <label for="time">Time:</label><br>
+                    <input type="time" id="time" name="time"><br><br>
+                    <input type="submit" value="Submit"><br><br>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

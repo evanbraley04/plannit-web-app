@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Main</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+
+    <body class="main_body">
+        <div class="sidebar">
+            <i class='bx bx-planet' ></i>
+            <p class="title">Plannit</p> 
+            <p class="line"></p>
+            <div class="side_buttons">
+                <a href="#" class="home" style="background-color:#23acda; border: 2px solid white;">Home</a>
+                <a href="{{ create_event_url }}" class="create">Create Event</a>
+                <a href="{{ share_planner_url }}" class="friends">Share Planner</a>
+                <a href="{{ friends_planner_url }}" class="friends-list">Friends</a>
+            </div>
+        </div>
+        
+        <div class="header">
+            <div class="info">
+                <a href={{ url_for('user_routes.user', username=current_user.id) }} class="settings">Settings</a>
+                <a href={{ url_for('user_routes.logout') }} class="logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="schedule">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li class="flash-message">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <div class="hello_user"><h3>Hello, {{current_user.username}}!</h3></div>
+            <div class="table">
+                <div>
+                    <p style="border-radius: 10px 0 0 10px;">Sunday</p><br>
+                    {% for event in sunday_event_list %}
+                        <nav class="eventtime">{{ event.time }}</nav><a class="eventtime" href="{{ url_for('event_routes.event_data', event_id=event._id) }}">{{ event.title }}</a><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Monday</p><br>
+                    {% for event in monday_event_list %}
+                        <nav class="eventtime">{{ event.time }}</nav><a class="eventtime" href="{{ url_for('event_routes.event_data', event_id=event._id) }}">{{ event.title }}</a><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Tuesday</p><br>
+                    {% for event in tuesday_event_list %}
+                        <nav class="eventtime">{{ event.time }}</nav><a class="eventtime" href="{{ url_for('event_routes.event_data', event_id=event._id) }}">{{ event.title }}</a><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Wednesday</p><br>
+                    {% for event in wednesday_event_list %}
+                        <nav class="eventtime">{{ event.time }}</nav><a class="eventtime" href="{{ url_for('event_routes.event_data', event_id=event._id) }}">{{ event.title }}</a><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Thursday</p><br>
+                    {% for event in thursday_event_list %}
+                        <nav class="eventtime">{{ event.time }}</nav><a class="eventtime" href="{{ url_for('event_routes.event_data', event_id=event._id) }}">{{ event.title }}</a><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Friday</p><br>
+                    {% for event in friday_event_list %}
+                        <nav class="eventtime">{{ event.time }}</nav><a class="eventtime" href="{{ url_for('event_routes.event_data', event_id=event._id) }}">{{ event.title }}</a><br><br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p style="border-radius: 0 10px 10px 0;">Saturday</p><br>
+                    {% for event in saturday_event_list %}
+                        <nav class="eventtime">{{ event.time }}</nav><a class="eventtime" href="{{ url_for('event_routes.event_data', event_id=event._id) }}">{{ event.title }}</a><br><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

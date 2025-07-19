@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Plannit - Admin Create Event</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <a href="{{ url_for('index') }}">Home</a>
+        <h1>Create Event</h1>
+        <form action="{{ url_for('event_routes.create_event') }}" method="post">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title"><br>
+            <label for="day">Day:</label><br>
+            <input type="text" id="day" name="day"><br>
+            <label for="time">Time:</label><br>
+            <input type="time" id="time" name="time"><br><br>
+            <input type="submit" value="Submit">
+          </form>
+    </body>
+</html>

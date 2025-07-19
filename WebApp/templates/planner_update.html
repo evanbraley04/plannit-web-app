@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Plannit - Update Planner</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+
+		<a href="/">Home</a>
+		<p>Update a planner</p>
+		<p>{{to_modify}}</p>
+
+		<form action="" method="post">
+			<label for="daylist">List of Day IDs</label><br>
+			<input type="text" id="daylist" name="daylist" value="{{days_in}}"><br>
+			<label for="userid">User ID</label><br>
+			<input type="text" id="userid" name="userid" value="{{user_id_in}}"><br>
+			<input type="submit" value="Update">
+		</form>
+
+		<p>{{message}}</p>
+
+	</body>
+</html>

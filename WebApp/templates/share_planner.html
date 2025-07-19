@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Share Planner</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+
+    <body class="share_planner_body">
+        <div class="sidebar">
+            <i class='bx bx-planet' ></i>
+            <p class="title">Plannit</p> 
+            <p class="line"></p>
+            <div class="side_buttons">
+                <a href="{{ url_for('index') }}" class="home">Home</a>
+                <a href="{{ create_event_url }}" class="create">Create Event</a>
+                <a href="#" class="friends" style="background-color:#23acda; border: 2px solid white;">Share Planner</a>
+                <a href="{{ url_for('user_routes.friends_planner') }}" class="friends-list">Friends</a>
+                
+            </div>
+        </div>
+        
+        <div class="header">
+            <div class="info">
+                <a href={{ url_for('user_routes.user', username=current_user.id) }} class="settings">Settings</a>
+                <a href={{ url_for('user_routes.logout') }} class="logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="add_friends">
+            <div class="add"><h3>Share Planner</h3></div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash-message">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <div class="form">
+
+                <form method="post" action="{{ url_for('user_routes.share_planner', id=user.get('_id')) }}">
+                    <label for="username">Friend's Username:</label><br>
+                    <input type="text" id="username" name="username"><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+
+   

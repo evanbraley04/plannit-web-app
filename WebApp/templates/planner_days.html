@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Plannit - Planner Days</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<p><a href="/">Home</a>
+		<h2>Current Planner ID:</h2>
+		<p>{{planner_id}}</p>
+		<h2>Attached User ID:</h2>
+		<p>{{user_id}}</p>
+		<h2>Days:</h2>
+		<p>
+		<ul>
+			{% for day in list_of_days %}
+				<li>Day ID: {{day}}</li>
+			{% endfor %}
+		</ul>
+		</p>
+		<p>
+			<a href="/planner_update/{{planner_id}}">Update</a>
+		</p>
+		<p>
+			<a href="/planner_delete/{{planner_id}}">Delete</a>
+		</p>
+	</body>
+</html>

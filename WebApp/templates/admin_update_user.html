@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Admin Update User</title>
+        <meta charset="utf-8">
+        <style>
+            .flash-message {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="{{ url_for('index') }}" class="home">Home</a>
+        <div class="schedule">
+            <div class="update-user-body">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="flash-message">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <h1>Update User Information</h1>
+                <div class="update-data">Username: {{user.get('username')}}<br> 
+                    Password: {{user.get('password')}}</div>
+                <p>Update User Information:</p><br>
+                <form method="post" action="{{ url_for('user_routes.update_user', id=user.get('_id')) }}">
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username"><br>
+                    <label for="password">Password:</label><br>
+                    <input type="text" id="password" name="password"><br><br>
+                    <input type="submit" value="Submit">
+                </form><br>
+            </div>
+        </div>
+    </body>
+</html>

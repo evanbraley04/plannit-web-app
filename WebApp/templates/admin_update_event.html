@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Admin Update Event</title>
+        <meta charset="utf-8">
+        <style>
+            .flash-message {
+                color: red;
+            }
+        </style>
+    </head>
+        <a href="{{ url_for('index') }}">Home</a>
+        <div>
+            <div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li class="flash-message" style="margin-left: 0px; list-style: none; color: lightgreen">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <h1>Update Event Information</h1>
+                <div class="info-of-events">Title: {{ event_data.get('title') }}<br>
+                    Time: {{ event_data.get('time') }}<br>
+                    Day: {{ event_data.get('day_id') }}</div>
+                <p>Update Event Information:<p>
+                <form action="{{ url_for('event_routes.update_event', event_id=event_id) }}" method="POST">
+                    <label for="title">Title:</label><br>
+                    <input type="text" id="title" name="title"><br>
+                    <label for="day">Day:</label><br>
+                    <input type="text" id="day" name="day"><br>
+                    <label for="time">Time:</label><br>
+                    <input type="time" id="time" name="time"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

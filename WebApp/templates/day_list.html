@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+    <html lang = "en">
+        <head>
+            <title>Plannit - Day List</title>
+            <meta charset = "utf-8" >
+            <style>
+                .flash-message{
+                    color: red;
+                }
+            </style>
+        </head>
+        <body>
+            <a href="{{ url_for('index') }}">Home</a>
+
+             
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash-message">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}            
+            <h1>All Days in Database:</h1>
+            <ul>
+                {% for day in daylist %}
+                    <li><a href="{{ url_for('day_routes.day', _id=day['_id']) }}">{{day['day_name']}}</a></li>
+                {% endfor %}
+            </ul>
+        </body>
+     </html>

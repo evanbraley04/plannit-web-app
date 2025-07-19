@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Plannit - Update Day</title>
+        <meta charset="utf-8">
+        <style>
+            .flash-message{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="{{ url_for('index') }}">Home</a>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash-message">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+        <h1>Update Day Information</h1>
+        <p>Day Name: {{day.get('day_name')}}</p>
+        <p>Update Day Information:</p>
+        <form method="post" action="{{ url_for('day_routes.update_day', _id=day.get('_id')) }}">
+            <label for="day_name">Day Name:</label><br>
+            <input type="text" id="day_name" name="day_name"><br>
+            <input type="submit" value="Submit Changes"><br>
+        </form>
+    </body>
+    </html>

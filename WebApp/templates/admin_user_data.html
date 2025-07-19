@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Admin User Data</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <a href="{{ url_for('index') }}" class="home">Home</a>
+        
+
+        <div class="schedule">
+            <div class="user-settings">
+                <h1>User Settings</h1>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="flash-message">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                <h2>Current Information for {{user.get('username')}}:</h3>
+                    <div class="data">Username: {{user.get('username')}}<br>
+                        Password: {{user.get('password')}}<br>
+                        Planner ID: {{user.get('planner_id')}}<br>
+                        Friends: {{user.get('friends')}}</div>
+                <h3>User Actions:</h3>
+                <a href="{{ url_for('user_routes.update_user', id=user.get('_id')) }}" class="update-user">Update User</a><br><br>    
+                    <form method="post" action="{{ url_for('user_routes.delete_user', id=user.get('_id')) }}">
+                        <label for="delete">Type 'delete' to delete this user</label><br>
+                        <input type="text" id="delete" name="delete"><br>
+                        <input type="submit" value="Submit">
+                    </form><br>
+            </div>
+        </div>
+    </body>
+</html>

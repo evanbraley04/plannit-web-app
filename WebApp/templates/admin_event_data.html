@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Admin Event Data</title>
+        <meta charset="utf-8">
+    </head>
+    <body class="main_body">
+        <a href="{{ url_for('index') }}">Home</a>
+        <div>
+            <div>
+                <h1>Event Settings</h1>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li class="flash-message">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <h2>Current Event Information for: {{ event_data.get('title') }}</h2>
+                <div class="event_data">
+                    Title: {{ event_data.get('title')}}<br>
+                    Day: {{ day_name }}<br>
+                    Time: {{ event_data.get('time') }}
+                </div>
+                <h3>Event Actions:</h3>
+                <a href="{{ url_for('event_routes.update_event', event_id=event_id) }}">Update Event</a></li><br><br>
+                    <form action="{{ url_for('event_routes.delete_event', event_id=event_id) }}" method="POST">
+                        <label for="delete_input">Type "delete" to Delete This Event:</label><br>
+                        <input type="text" id="delete_input" name="delete_input"><br>
+                        <input type="submit" value="Delete">
+                    </form>
+            </div>
+        </div> 
+    </body>
+</html>

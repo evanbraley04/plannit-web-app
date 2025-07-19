@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plannit - Event Data</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body class="main_body">
+        <div class="sidebar">
+            <i class='bx bx-planet' ></i>
+            <p class="title">Plannit</p> 
+            <p class="line"></p>
+            <div class="side_buttons">
+                <a href="{{ url_for('index') }}" class="home">Home</a>
+                <a href="{{ create_event_url }}" class="create">Create Event</a>
+                <a href="{{ share_planner_url }}" class="friends">Share Planner</a>
+                <a href="{{ friends_planner_url }}" class="friends-list">Friends</a>
+            </div>
+        </div>
+        
+        <div class="header">
+            <div class="info">
+                <a href={{ url_for('user_routes.user', username=current_user.id) }} class="settings">Settings</a>
+                <a href={{ url_for('user_routes.logout') }} class="logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="schedule">
+            <div class="event-settings-data">
+                <h1>Event Settings</h1><br><br>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li class="flash-message">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <h2>Current Event Information for: {{ event_data.get('title') }}</h2><br>
+                <div class="event_data">
+                    Title: {{ event_data.get('title') }}<br>
+                    Day: {{ day_name }}<br>
+                    Time: {{ event_data.get('time') }}
+                </div><br><br>
+                <a href="{{ url_for('event_routes.update_event', event_id=event_id) }}" class="event-updating">Update Event</a></li><br><br>
+                    <form action="{{ url_for('event_routes.delete_event', event_id=event_id) }}" method="POST">
+                        <label for="delete_input">Type "delete" to Delete This Event:</label><br>
+                        <input type="text" id="delete_input" name="delete_input"><br>
+                        <input type="submit" value="Delete">
+                    </form>
+            </div>
+        </div> 
+    </body>
+</html>
